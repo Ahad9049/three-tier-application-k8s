@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+
+  mongodb:
+    image: mongo:7
+    container_name: mern-mongodb
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mern-network
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  backend:
+     build: ./backend
+     container_name: mern-backend
+     restart: unless-stopped
+  depends_on:
+    mongodb:
+      condition: service_healthy
+  networks:
+    - mern-network
+  ports:
+    - "5000:5000"
+
+   healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:5000"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+
+  frontend:
+    build: ./frontend
+    container_name: mern-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - mern-network
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongo-data:
+
+networks:
+  mern-network:
+    driver: bridge
