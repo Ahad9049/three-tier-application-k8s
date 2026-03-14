@@ -12,7 +12,7 @@ COPY . .
 
 # <--- --Stage 2----->
 FROM node:18-alpine
-RUN adduser -D appuser
+RUN adduser -S appuser
 WORKDIR /app
 COPY --from=builder /app .
 USER appuser
