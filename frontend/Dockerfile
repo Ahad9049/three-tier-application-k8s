@@ -18,7 +18,7 @@ RUN npm install -g serve
 
 COPY --from=builder /app/build /build
 
-RUN adduser -D appuser
+RUN adduser -S appuser
 
 USER appuser
 
