@@ -6,6 +6,7 @@ pipeline {
         FRONTEND_IMAGE = "ghcr.io/${GHCR_USERNAME}/three-tier-app-frontend"
         BACKEND_IMAGE  = "ghcr.io/${GHCR_USERNAME}/three-tier-app-backend"
         GHCR_CREDENTIALS_ID = "ghcr"
+        BUILD_TAG = "${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -19,10 +20,8 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    def tag = "${env.BUILD_NUMBER}"
-
-                    env.FRONTEND_TAG = "${FRONTEND_IMAGE}:${tag}"
-                    env.BACKEND_TAG  = "${BACKEND_IMAGE}:${tag}"
+                    env.FRONTEND_TAG = "${FRONTEND_IMAGE}:${BUILD_TAG}"
+                    env.BACKEND_TAG  = "${BACKEND_IMAGE}:${BUILD_TAG}"
 
                     sh """
                     docker build -t $FRONTEND_TAG ./frontend
@@ -48,7 +47,7 @@ pipeline {
             }
         }
 
-        stage('Cleanup') {
+        stage('Cleanup Local Images') {
             steps {
                 sh """
                 docker rmi -f $FRONTEND_TAG || true
@@ -57,11 +56,11 @@ pipeline {
             }
         }
 
-        stage('Update docker-compose') {
+        stage('Update docker-compose.yml') {
             steps {
                 sh """
-                yq -i ".services.frontend.image = \"three-tier-app-frontend:${BUILD_NUMBER}\"" docker-compose.yml
-                yq -i ".services.backend.image = \"three-tier-app-backend:${BUILD_NUMBER}\"" docker-compose.yml
+                yq -i ".services.frontend.image = \\"${FRONTEND_IMAGE}:${BUILD_TAG}\\"" docker-compose.yml
+                yq -i ".services.backend.image = \\"${BACKEND_IMAGE}:${BUILD_TAG}\\"" docker-compose.yml
                 """
             }
         }
