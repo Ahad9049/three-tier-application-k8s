@@ -60,8 +60,8 @@ pipeline {
         stage('Update docker-compose') {
             steps {
                 sh """
-                sed -i "s|three-tier-app-frontend:.*|three-tier-app-frontend:${BUILD_NUMBER}|g" docker-compose.yml
-                sed -i "s|three-tier-app-backend:.*|three-tier-app-backend:${BUILD_NUMBER}|g" docker-compose.yml
+                yq -i ".services.frontend.image = \"three-tier-app-frontend:${BUILD_NUMBER}\"" docker-compose.yml
+                yq -i ".services.backend.image = \"three-tier-app-backend:${BUILD_NUMBER}\"" docker-compose.yml
                 """
             }
         }
