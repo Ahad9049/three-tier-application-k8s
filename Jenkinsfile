@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/Ahad9049/three-tier-application.git'
-                credentialsId: "${GITHUB_CREDENTIALS}"
+                credentialsId: "github"
                 
             }
         }
