@@ -6,7 +6,7 @@ pipeline {
         ECR_URI = "116429398424.dkr.ecr.us-east-1.amazonaws.com"
         AWS_ECR_REPO_FRONTEND = "three-tier-app-frontend"
         AWS_ECR_REPO_BACKEND = "three-tier-app-backend"
-        GH_CREDENTIALS_ID = "github"
+        GITHUB_CREDENTIALS = "github"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
