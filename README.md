@@ -15,6 +15,7 @@ This is a full-stack three-tier web application built with:
 - ├── frontend/ # React frontend (served via Nginx)
 - ├── docker-compose.yml # Docker Compose configuration file
 - └── README.md # Project documentation
+- └── Jenkinsfile #declarative pipeline
 
 
 ### 📥 Step 1: Clone the Repository
