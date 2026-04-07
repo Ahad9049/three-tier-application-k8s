@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub_creds') // Jenkins stored credentials
+        DOCKERHUB_CREDENTIALS = 'dockerhub_creds'
         BRANCH_NAME = "${env.BRANCH_NAME}"
         IMAGE_TAG = "${BRANCH_NAME}-${BUILD_NUMBER}"
         DOCKERHUB_USER = "abdulahad9049"
@@ -16,13 +16,15 @@ pipeline {
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Docker Login') {
             steps {
-                script {
-                    echo "Logging in to Docker Hub..."
-                    sh """
-                        echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
-                    """
+              
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_creds', 
+                                                  usernameVariable: 'DOCKERHUB_USER', 
+                                                  passwordVariable: 'DOCKERHUB_PASS')]) {
+                    sh '''
+                        echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
+                    '''
                 }
             }
         }
