@@ -4,7 +4,7 @@ services:
 
   mongodb:
     image: mongo:7
-    container_name: mern-mongodb
+    container_name: mern-mongodb-2
     restart: always
     volumes:
       - mongo-data:/data/db
@@ -27,7 +27,7 @@ services:
     networks:
       - mern-network
     ports:
-      - "5000:5000"
+      - "5002:5000"
     healthcheck:
       interval: 30s
       timeout: 10s
@@ -44,7 +44,7 @@ services:
     networks:
       - mern-network
     ports:
-      - "3000:3000"
+      - "3002:3000"
     healthcheck:
       interval: 30s
       timeout: 10s
