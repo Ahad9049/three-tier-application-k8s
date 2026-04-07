@@ -15,8 +15,6 @@ pipeline {
                 checkout scm
             }
         }
-
-    stages {
         stage('Docker Login') {
             steps {
               
