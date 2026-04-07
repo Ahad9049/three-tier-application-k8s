@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub_creds') // Jenkins stored credentials
+        DOCKERHUB_CREDENTIALS = 'dockerhub_creds'
         BRANCH_NAME = "${env.BRANCH_NAME}"
         IMAGE_TAG = "${BRANCH_NAME}-${BUILD_NUMBER}"
         DOCKERHUB_USER = "abdulahad9049"
