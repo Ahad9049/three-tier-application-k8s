@@ -18,7 +18,7 @@ services:
       retries: 5
   backend:
     image: ${BACKEND_IMAGE}
-    container_name: mern-backend
+    container_name: mern-backend-2
     restart: always
     depends_on:
      - mongodb
@@ -37,7 +37,7 @@ services:
 
   frontend:
     image: ${FRONTEND_IMAGE}
-    container_name: mern-frontend
+    container_name: mern-frontend-2
     restart: always
     depends_on:
      - backend
