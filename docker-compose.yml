@@ -4,7 +4,7 @@ services:
 
   mongodb:
     image: mongo:7
-    container_name: mern-mongodb
+    container_name: mern-mongodb-5
     restart: always
     volumes:
       - mongo-data:/data/db
@@ -18,7 +18,7 @@ services:
       retries: 5
   backend:
     image: ${BACKEND_IMAGE}
-    container_name: mern-backend
+    container_name: mern-backend-6
     restart: always
     depends_on:
      - mongodb
@@ -37,7 +37,7 @@ services:
 
   frontend:
     image: ${FRONTEND_IMAGE}
-    container_name: mern-frontend
+    container_name: mern-frontend-6
     restart: always
     depends_on:
      - backend
