@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    label {agent 'ec2-dev'}
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub_creds'
@@ -62,13 +62,6 @@ FRONTEND_IMAGE=${env.FRONTEND_TAG}
             }
         }
 
-        stage('Approval for Staging/Prod Deploy') {
-            when {
-                anyOf {
-                    branch 'stg'
-                    branch 'prd'
-                }
-            }
             steps {
                 input message: "Deploy to ${BRANCH_NAME} environment?", ok: "Yes, Deploy"
             }
