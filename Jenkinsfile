@@ -62,11 +62,6 @@ FRONTEND_IMAGE=${env.FRONTEND_TAG}
             }
         }
 
-            steps {
-                input message: "Deploy to ${BRANCH_NAME} environment?", ok: "Yes, Deploy"
-            }
-        }
-
         stage('Run Docker Compose') {
             steps {
                 sh """
@@ -96,3 +91,4 @@ FRONTEND_IMAGE=${env.FRONTEND_TAG}
             echo "Pipeline failed!"
         }
     }
+ }
