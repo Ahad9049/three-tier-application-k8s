@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any {label 'ec2-stg'}
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub_creds'
