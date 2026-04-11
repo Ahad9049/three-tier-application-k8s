@@ -25,7 +25,7 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                buildImages('./backend', './frontend', IMAGE_TAG)
+                buildImages('./backend', './frontend', IMAGE_TAG, env.DOCKERHUB_USER)
                 
             }
         }
