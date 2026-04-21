@@ -101,21 +101,9 @@ three-tier-application-k8s/
 │   ├── frontend/
 │   │   ├── deployment.yaml
 │   │   ├── service.yaml
-│   │   └── hpa.yaml
 │   ├── backend/
 │   │   ├── deployment.yaml
 │   │   ├── service.yaml
-│   │   └── hpa.yaml
-│   ├── secrets/
-│   │   └── db-secret.yaml
-│   ├── rbac/
-│   │   ├── roles.yaml
-│   │   └── rolebindings.yaml
-│   ├── network-policies/
-│   │   └── policies.yaml
-│   └── monitoring/
-│       ├── prometheus/
-│       └── grafana/
 ├── jenkins/
 │   └── Jenkinsfile
 └── README.md
